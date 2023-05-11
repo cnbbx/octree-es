@@ -1,0 +1,12 @@
+{
+  "name": "octree-es",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/octree.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnbbx/octree-es.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

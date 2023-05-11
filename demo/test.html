@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Octree test</title>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  look console info.
+  <script type="module">
+    import { Octree, Vec3 } from "../src/octree.js";
+
+    // 创建一个测试用的三维点集合
+    const points = [
+      new Vec3(0, 0, 0),
+      new Vec3(5, 5, 5),
+      new Vec3(-5, 5, -5),
+      new Vec3(10, 10, 10),
+      new Vec3(15, 15, 15),
+    ];
+
+    // 创建一个新的八叉树实例，并将所有点添加到树中
+    const tree = new Octree(new Vec3(0, 0, 0), new Vec3(20, 20, 20));
+    for (const p of points) {
+      tree.add(p, null);
+    }
+
+    // 测试 has 方法是否返回预期结果
+    console.log(tree.has(new Vec3(5, 5, 5))); // 输出：true
+    console.log(tree.has(new Vec3(10, 10, -10))); // 输出：false
+
+    // 测试 findNearestPoint 方法是否返回预期结果
+    const nearestPoint = tree.findNearestPoint(new Vec3(8, 8, 8));
+    console.log(nearestPoint); // 输出：{ point: Vec3 { x: 5, y: 5, z: 5 } }
+
+    // 测试 findNearbyPoints 方法是否返回预期结果
+    const nearbyPoints = tree.findNearbyPoints(new Vec3(0, 0, 0), 9);
+    console.log(nearbyPoints); // 输出：{ points: [ Vec3 { x: 0, y: 0, z: 0 }, Vec3 { x: 5, y: 5, z: 5 }, Vec3 { x: -5, y: 5, z: -5 } ], data: [ null, null, null ] 
+  </script>
+</body>
+
+</html>
